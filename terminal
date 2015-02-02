@@ -1,0 +1,44 @@
+Script started on Thứ bảy, 31 Tháng một Năm 2015 19:56:23 ICT
+]0;discite4ever@Discite4ever: ~/django_trialdiscite4ever@Discite4ever:~/django_trial$ python manage.py runserver[9Pcd ./django_trialpython manage.py runserver[9Pcd ./django_trialexit[Kpython manage.py test polls
+Creating test database for alias 'default'...
+.F.F..
+======================================================================
+FAIL: test_index_view_with_a_future_question (polls.tests.QuestionViewTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/discite4ever/django_trial/polls/tests.py", line 80, in test_index_view_with_a_future_question
+    status_code=200)
+  File "/usr/local/lib/python2.7/dist-packages/django/test/testcases.py", line 363, in assertContains
+    msg_prefix + "Couldn't find %s in response" % text_repr)
+AssertionError: Couldn't find 'No polls are available.' in response
+
+======================================================================
+FAIL: test_index_view_with_future_question_and_past_question (polls.tests.QuestionViewTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/discite4ever/django_trial/polls/tests.py", line 93, in test_index_view_with_future_question_and_past_question
+    ['<Question: Past question.>']
+  File "/usr/local/lib/python2.7/dist-packages/django/test/testcases.py", line 855, in assertQuerysetEqual
+    return self.assertEqual(list(items), values, msg=msg)
+AssertionError: Lists differ: ['<Question: Future question.>... != ['<Question: Past question.>']
+
+First differing element 0:
+<Question: Future question.>
+<Question: Past question.>
+
+First list contains 1 additional elements.
+First extra element 1:
+<Question: Past question.>
+
+- ['<Question: Future question.>', '<Question: Past question.>']
++ ['<Question: Past question.>']
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.022s
+
+FAILED (failures=2)
+Destroying test database for alias 'default'...
+]0;discite4ever@Discite4ever: ~/django_trialdiscite4ever@Discite4ever:~/django_trial$ exit
+exit
+
+Script done on Thứ bảy, 31 Tháng một Năm 2015 19:56:31 ICT
