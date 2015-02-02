@@ -42,6 +42,15 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
+    def get_queryset(self):
+        S = Question.objects.filter(pub_date__lte = timezone.now())
+        t = list()
+        t = None
+        for x in S:
+            if (x.choice_set.count > 0):
+                t.apend(x)
+        # .objects.filter(choice_set.all.count()__gte = 1)
+        return S
 
 def vote(request, question_id):
     p = get_object_or_404(Question, pk=question_id)

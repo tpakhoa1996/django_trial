@@ -136,3 +136,25 @@ class QuestionIndexDetailTests(TestCase):
                                    args=(past_question.id,)))
         self.assertContains(response, past_question.question_text,
                             status_code=200)
+
+    def test_was_published_question_no_choice(self):
+        no_choice_question = create_question(question_text = 'No choice.', days = -5)
+        response = self.client.get(reverse('polls:detail', args = (no_choice_question.id,)))
+        self.assertEqual(response.status_code, 404)
+
+    def test_was_published_question_with_choices(self):
+        choices_question = create_question(question_text = 'Two choices.', days = -5)
+        choices_question.choice_set.create(choice_text = 'True')
+        choices_question.choice_set.create(choice_text = 'False')
+        response = self.client.get(reverse('polls:detail', args = (choices_question.id,)))
+        self.assertEqual(response.status_code, 200)
+
+# =======================================Test Result=======================================
+# ==========================================================================================
+# ==========================================================================================
+
+class IndexResultTests(TestCase):
+    def test_detail_result_with_a_future_question(self):
+        future_question = create_question(question_text = 'Future Question,', days = 5)
+        response = self.client.get(reverse('polls:results', args = (future_question.id,)))
+        self.assertEqual(response.status_code, 404)
